@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4512014673963974}
   - component: {fileID: 212613311167121352}
   - component: {fileID: 114902768977523398}
+  - component: {fileID: 114726022818638782}
   - component: {fileID: 50625216055229182}
   m_Layer: 0
   m_Name: RockBall
@@ -62,6 +63,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &114726022818638782
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1682973975834824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 640338c9090b43447b1e4b5894e4a138, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 100
+  DiesOnTouch: 0
 --- !u!114 &114902768977523398
 MonoBehaviour:
   m_ObjectHideFlags: 1

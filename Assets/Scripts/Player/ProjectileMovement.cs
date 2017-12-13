@@ -13,6 +13,7 @@ public class ProjectileMovement : MonoBehaviour {
 	protected bool IsGivenInitialVelocity = false;
 	protected Vector2 startingPosition;
 	protected float PassedDistance = 0f;
+	protected bool AllowToMove = true;
 
 	// Use this for initialization
 	void Start () {
@@ -23,19 +24,25 @@ public class ProjectileMovement : MonoBehaviour {
 		_rb.velocity = InitialVelocity;
 	}
 
+	public void Stop(){
+		AllowToMove = false;
+	}
+
 	// Update is called once per frame
 	void FixedUpdate () {
-		if (LivingDistance > 0) {
-			PassedDistance = Vector3.Distance(transform.position, startingPosition);
-			if(PassedDistance >= LivingDistance){
-				Kill ();
+		if (AllowToMove) {
+			if (LivingDistance > 0) {
+				PassedDistance = Vector3.Distance (transform.position, startingPosition);
+				if (PassedDistance >= LivingDistance) {
+					Kill ();
+				}
 			}
-		}
-		if (IsGivenInitialVelocity) {
-			_rb.AddForce (transform.up * Speed * Time.fixedDeltaTime);
-		} else {
-			_rb.velocity = InitialVelocity;
-			IsGivenInitialVelocity = true;
+			if (IsGivenInitialVelocity) {
+				_rb.AddForce (transform.up * Speed * Time.fixedDeltaTime);
+			} else {
+				_rb.velocity = InitialVelocity;
+				IsGivenInitialVelocity = true;
+			}
 		}
 	}
 

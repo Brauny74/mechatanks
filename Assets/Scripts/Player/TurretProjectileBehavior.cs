@@ -9,7 +9,7 @@ public class TurretProjectileBehavior : MonoBehaviour {
 	public bool OnCooldown = false;
 
 	public int Magazine = 2;
-	public float ReloadTime = 2f;
+	public float ReloadTime = 10f;
 	public Text AmmoText;
 
 	protected int CurrentLoad;
@@ -32,23 +32,33 @@ public class TurretProjectileBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButtonDown (0) && !OnCooldown && !OnReload) {			
+		if (AmmoText != null) {
+			AmmoText.text = CurrentLoad.ToString () + "/" + Magazine.ToString ();
+		}
+		if (Input.GetMouseButtonDown (0) && !OnCooldown && !OnReload && CurrentLoad > 0) {			
 			GameObject tmp_cb = Instantiate (Projectile, transform.position, transform.rotation);
 			ProjectileMovement tmp_cb_c = tmp_cb.GetComponent <ProjectileMovement> ();
 			tmp_cb_c.InitialVelocity = parentRB.velocity;
 			//tmp_cb_c.Damage += AddDamage;
+			CurrentLoad--;
 			OnCooldown = true;
-			StartCoroutine (Cooldown ());
+			if (CurrentLoad == 0) {
+				OnReload = true;
+				StartCoroutine (Reload ());
+			} else {				
+				StartCoroutine (Cooldown ());
+			}
 		}
 	}
 
 	IEnumerator Cooldown(){
-		yield return new WaitForSeconds (CoolDownTime);
+		yield return new WaitForSecondsRealtime (CoolDownTime);
 		OnCooldown = false;
 	}
 
 	IEnumerator Reload(){
-		yield return new WaitForSeconds (ReloadTime);
+		yield return new WaitForSecondsRealtime (ReloadTime);
+		CurrentLoad = Magazine;
 		OnCooldown = false;
 		OnReload = false;
 	}
