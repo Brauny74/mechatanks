@@ -5,7 +5,6 @@ using UnityEngine;
 public class ProjectileMovement : MonoBehaviour {
 
 	public float Speed = 3000f;
-	public int Damage = 30;
 	public Vector3 InitialVelocity;
 	public float LivingDistance = -1;
 

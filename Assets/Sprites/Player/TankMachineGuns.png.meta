@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0e2bb37014eecf9418e38d26cc4a8569
-timeCreated: 1513087676
+guid: dacedb64782ecf7439c7f14b7ad63a0e
+timeCreated: 1513087700
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: TankBases_0
+    21300000: TankMachineGuns_0
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -92,13 +92,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TankBases_0
+      name: TankMachineGuns_0
       rect:
         serializedVersion: 2
-        x: 25
-        y: 258
-        width: 206
-        height: 256
+        x: 18
+        y: 318
+        width: 42
+        height: 89
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
