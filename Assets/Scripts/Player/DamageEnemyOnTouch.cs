@@ -22,18 +22,15 @@ public class DamageEnemyOnTouch : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
-		if (other.tag == "Enemy") {			
-			//EnemyHealth _eh = other.gameObject.GetComponent <EnemyHealth> ();
-			//_eh.SetDamage(Damage);
+		if (other.tag == "Enemy") {
+			EnemyHealth _eh = other.gameObject.GetComponent <EnemyHealth> ();
+			_eh.DealDamage(Damage);
 			if (DiesOnTouch) {
 				AllowToMove = false;
 				if (_anim != null) {
-					float delay = 0.1f;
 					mov.Stop ();
-					Destroy (gameObject, _anim.GetCurrentAnimatorStateInfo (0).length + delay);
-				} else {
-					Destroy (gameObject);
 				}
+				mov.Kill ();
 			}
 		}
 	}

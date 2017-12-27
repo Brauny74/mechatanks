@@ -47,7 +47,12 @@ public class TankMovement : MonoBehaviour {
 		MaxStirring = 300f;
 		if (InputStirring != 0) {
 			if (InputStirring < MaxStirring) {
-				_rb.AddTorque (rotation * InputStirring);
+				if (InputThrottle >= 0) {
+					_rb.AddTorque (rotation * InputStirring);
+				}
+				if (InputThrottle < 0) {
+					_rb.AddTorque (0 - rotation * InputStirring);
+				}
 			}
 		} else {
 			_rb.angularVelocity = ExpNumberTo (_rb.angularVelocity, 0f, 0.5f);

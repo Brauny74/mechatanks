@@ -14,6 +14,7 @@ public class ProjectileMovement : MonoBehaviour {
 	protected Vector2 startingPosition;
 	protected float PassedDistance = 0f;
 	protected bool AllowToMove = true;
+	protected Animator anim;
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +23,7 @@ public class ProjectileMovement : MonoBehaviour {
 		_rb = gameObject.GetComponent <Rigidbody2D> ();	
 		startingPosition = transform.position;
 		_rb.velocity = InitialVelocity;
+		anim = gameObject.GetComponent <Animator> ();
 	}
 
 	public void Stop(){
@@ -46,14 +48,22 @@ public class ProjectileMovement : MonoBehaviour {
 		}
 	}
 
-	void Kill(){
+	public void Kill(){
 		//Here we will change his state to dying.
 		//Pause to let animation play.
-		StartCoroutine (Die ());
+		if (anim != null) {			
+			anim.SetBool ("IsDead", true);
+			Stop ();
+			AnimatorClipInfo[] t_CurrentClipInfo = anim.GetCurrentAnimatorClipInfo (0);
+			Destroy (gameObject, t_CurrentClipInfo [0].clip.length);
+		} else {
+			Destroy (gameObject);
+		}
 	}
 
-	IEnumerator Die(){
-		yield return new WaitForSecondsRealtime (1f);
-		Destroy (gameObject);
+	void OnColliderEnter2D(Collider2D other){
+		if (other.gameObject.layer == 8 || other.tag == "Player" || other.tag == "Enemy") {
+			Kill ();
+		}
 	}
 }

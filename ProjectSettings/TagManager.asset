@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -13,9 +14,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Obstacle
+  - Moving Objects
+  - Player
   - 
   - 
   - 
@@ -58,4 +59,7 @@ TagManager:
     locked: 0
   - name: Turret
     uniqueID: 39540425
+    locked: 0
+  - name: GUI
+    uniqueID: 2759189747
     locked: 0
